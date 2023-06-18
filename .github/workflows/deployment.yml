@@ -25,6 +25,8 @@ jobs:
             APP_ENV=production \
             APP_DEBUG=false \
             APP_URL=http://laravelpos-env-1.eba-kpfhmwyf.ap-southeast-1.elasticbeanstalk.com \
+      - name: Install composer dependencies
+        run: composer install
       - name: Generate app key 
         run: php artisan key:generate
       - name: Create zip deployment package
