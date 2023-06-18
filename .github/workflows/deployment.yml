@@ -24,18 +24,17 @@ jobs:
             APP_NAME='"Laravel POS"' \
             APP_ENV=production \
             APP_DEBUG=false \
-            APP_URL=http://laravel-cicd-env.eba-uakgfk8y.ap-southeast-1.elasticbeanstalk.com \
-            QUEUE_CONNECTION=database 
+            APP_URL=http://laravelpos-env-1.eba-kpfhmwyf.ap-southeast-1.elasticbeanstalk.com \
       - name: Create zip deployment package
         run: zip -r deploy.zip ./ -x "dotenv"
-      # - name: Deploy to elastic beanstalk
-      #   uses: einaregilsson/beanstalk-deploy@v21
-      #   with:
-      #     aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     application_name: laravel-cicd
-      #     environment_name: laravel-cicd-env
-      #     existing_bucket_name: elasticbeanstalk-ap-southeast-1-476139910356
-      #     version_label: laravel-pos-${{ github.run_number }}
-      #     region: ap-southeast-1
-      #     deployment_package: deploy.zip
+      - name: Deploy to elastic beanstalk
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: "laravel POS"
+          environment_name: "LaravelPOS-env-1"
+          existing_bucket_name: elasticbeanstalk-ap-southeast-1-476139910356
+          version_label: laravel-pos-${{ github.run_number }}
+          region: ap-southeast-1
+          deployment_package: deploy.zip
