@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>Log In | UBold - Responsive Admin Dashboard Template</title>
+        <title>Logout | UBold - Responsive Admin Dashboard Template</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -17,12 +17,8 @@
 		<link href="{{ asset('backend/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style"/>
 		<!-- icons -->
 		<link href="{{ asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-
-        <link href="{{ asset('backend/style.css') }}" rel="stylesheet" type="text/css" />
-
 		<!-- Head js -->
 		<script src="{{ asset('backend/assets/js/head.js') }}"></script>
-
 
     </head>
 
@@ -52,36 +48,20 @@
                                     </div>
                                 </div>
 
-                                <form action="{{ route('login') }}" method="POST" class="mt-4">
-                                    @csrf
-                                    <div class="mb-3">
-                                        <label for="login" class="form-label">Email/Username/Phone</label>
-                                        <input class="form-control" type="text" id="login" name="login" required="">
-                                        <x-input-error :messages="$errors->get('login')" class="mt-2" style="color:red"/>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">Password</label>
-                                        <div class="input-group input-group-merge">
-                                            <input type="password" id="password" name="password" class="form-control">
-                                            <div class="input-group-text" data-password="false">
-                                                <span class="password-eye"></span>
-                                            </div>
+                                <div class="text-center">
+                                    <div class="mt-4">
+                                        <div class="logout-checkmark">
+                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+                                                <circle class="path circle" fill="none" stroke="#4bd396" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+                                                <polyline class="path check" fill="none" stroke="#4bd396" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+                                            </svg>
                                         </div>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <div class="form-check">
-                                            <input type="checkbox" name="remember" class="form-check-input" id="checkbox-signin">
-                                            <label class="form-check-label" for="checkbox-signin">Remember me</label>
-                                        </div>
-                                    </div>
+                                    <h3>See you again !</h3>
 
-                                    <div class="text-center d-grid">
-                                        <button class="btn btn-primary" type="submit"> Log In </button>
-                                    </div>
-
-                                </form>
+                                    <p class="text-muted"> You are now successfully sign out. </p>
+                                </div>
 
                             </div> <!-- end card-body -->
                         </div>
@@ -89,10 +69,7 @@
 
                         <div class="row mt-3">
                             <div class="col-12 text-center">
-                                @if (Route::has('password.request'))
-                                    <p> <a href="{{ route('password.request') }}" class="text-white-50 ms-1">Forgot your password?</a></p>
-                                @endif
-                                                                
+                                <p class="text-white-50">Back to <a href="{{ route('login') }}" class="text-white ms-1"><b>Sign In</b></a></p>
                             </div> <!-- end col -->
                         </div>
                         <!-- end row -->

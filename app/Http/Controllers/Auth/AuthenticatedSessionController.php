@@ -32,6 +32,11 @@ class AuthenticatedSessionController extends Controller
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
+    public function logoutPage()
+    {
+        return view('auth.logout');
+    }
+
     /**
      * Destroy an authenticated session.
      */
@@ -43,6 +48,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/logout');
     }
 }
