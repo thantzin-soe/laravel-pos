@@ -128,7 +128,7 @@
     
                         <li class="dropdown notification-list topbar-dropdown">
                             <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="{{ asset('backend/assets/images/users/user-1.jpg') }}" alt="user-image" class="rounded-circle">
+                                <img src="{{ auth()->user()->photo ? auth()->user()->photo_url : config('app.cloudinary_no_image_url') }}" alt="user-image" class="rounded-circle">
                                 <span class="pro-user-name ms-1">
                                     Geneva <i class="mdi mdi-chevron-down"></i> 
                                 </span>
@@ -140,7 +140,7 @@
                                 </div>
     
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="{{ route('profile.edit') }}" class="dropdown-item notify-item">
                                     <i class="fe-user"></i>
                                     <span>My Account</span>
                                 </a>
@@ -152,9 +152,9 @@
                                 </a>
     
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="{{ route('password.edit') }}" class="dropdown-item notify-item">
                                     <i class="fe-lock"></i>
-                                    <span>Lock Screen</span>
+                                    <span>Change Password</span>
                                 </a>
     
                                 <div class="dropdown-divider"></div>
@@ -162,12 +162,6 @@
                                 <!-- item-->
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-
-                                    {{-- <x-dropdown-link :href="route('logout')"
-                                            onclick="event.preventDefault();
-                                                        this.closest('form').submit();">
-                                        {{ __('Log Out') }}
-                                    </x-dropdown-link> --}}
                                     <a href="{{ route('logout') }}" class="dropdown-item notify-item" onclick="event.preventDefault();
                                                         this.closest('form').submit();">
                                         <i class="fe-log-out"></i>

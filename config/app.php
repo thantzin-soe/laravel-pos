@@ -183,6 +183,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ])->toArray(),
 
+    'cloudinary_no_image_url' => env('CLOUDINARY_NO_IMAGE_URL')
 ];

@@ -10,6 +10,12 @@ use Illuminate\Validation\Rules\Password;
 
 class PasswordController extends Controller
 {
+    public function passwordChange()
+    {
+        return view('auth.password-change');
+    }
+
+
     /**
      * Update the user's password.
      */
@@ -24,6 +30,11 @@ class PasswordController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        return back()->with('status', 'password-updated');
+        $notification = [
+            'message' => 'Password changed successfully',
+            'alert-type' => 'success'
+        ];
+
+        return back()->with($notification);
     }
 }
