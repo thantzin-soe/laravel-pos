@@ -73,23 +73,29 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="name" class="form-label">Name</label>
-                                                <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required>
-                                        		<x-input-error :messages="$errors->get('name')" class="mt-2" style="color:red"/>
+                                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $user->name }}" required>
+                                        		@error('name')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="email" class="form-label">Email</label>
-                                                <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
-                                        		<x-input-error :messages="$errors->get('email')" class="mt-2" style="color:red"/>
+                                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ $user->email }}" required>
+                                        		@error('email')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div> <!-- end col -->
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="phone" class="form-label">Phone</label>
-                                                <input type="text" class="form-control" id="phone" name="phone" value="{{ $user->phone }}">
-                                       		 	<x-input-error :messages="$errors->get('phone')" class="mt-2" style="color:red"/>
+                                                <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ $user->phone }}">
+                                       		 	@error('phone')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div> <!-- end col -->
                                     </div> <!-- end row -->
@@ -98,8 +104,10 @@
                                     	<div class="col-md-12">
                                     		<div class="mb-3">
                                                 <label for="photo" class="form-label">Profile Image</label>
-                                                <input type="file" class="form-control" id="photo" name="photo">
-                                        		<x-input-error :messages="$errors->get('photo')" class="mt-2" style="color:red"/>
+                                                <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo">
+                                        		@error('photo')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                     	</div>
                                     </div>

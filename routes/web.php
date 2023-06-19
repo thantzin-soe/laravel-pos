@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\Backend\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/password-change', [PasswordController::class, 'passwordChange'])->name('password.edit');
+
+
+    Route::resource('employees', EmployeeController::class);
 });
 
 Route::get('logout', [AuthenticatedSessionController::class, 'logoutPage']);

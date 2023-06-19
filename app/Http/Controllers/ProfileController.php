@@ -50,6 +50,7 @@ class ProfileController extends Controller
             ]);
 
             $request->user()->photo = $result->getPublicId();
+            $request->user()->photo_url = $result->getSecurePath();
         }
 
         $request->user()->save();
