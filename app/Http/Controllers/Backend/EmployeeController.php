@@ -25,7 +25,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return view('backend.employee.index')->with('employees', $this->employeeRepository->paginate());
+        return view('backend.employee.index')->with('employees', $this->employeeRepository->getAll());
     }
 
     /**
