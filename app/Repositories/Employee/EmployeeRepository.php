@@ -6,6 +6,7 @@ use App\Models\Employee;
 use App\Repositories\Employee\EmployeeRepositoryInterface;
 use App\Repositories\BaseRepository;
 use DataTables;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class EmployeeRepository.
@@ -43,5 +44,14 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
                 })
                 ->rawColumns(['action', 'image'])
                 ->make(true);
+    }
+
+    public function delete($id): bool
+    {
+        $employee = $this->findById($id);
+        if ($employee->image) {
+            Storage::disk('cloudinary')->delete($employee->image);
+        }
+        return $employee->delete();
     }
 }

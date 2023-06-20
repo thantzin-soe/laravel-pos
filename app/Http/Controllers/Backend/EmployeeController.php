@@ -46,8 +46,7 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeStoreRequest $request)
     {
-        $new_employee = new Employee();
-        $new_employee->fill($request->safe()->except(['image']));
+        $data = $request->safe()->except(['image']);
 
         if ($request->file('image')) {
             $file = $request->file('image');
@@ -61,11 +60,11 @@ class EmployeeController extends Controller
                 'public_id' => $upload_path,
             ]);
 
-            $new_employee->image = $result->getPublicId();
-            $new_employee->image_url = $result->getSecurePath();
+            $data['image'] = $result->getPublicId();
+            $data['image_url'] = $result->getSecurePath();
         }
 
-        $new_employee->save();
+        $this->employeeRepository->create($data);
 
         $notification = [
             'message' => 'New employee created successfully',
@@ -96,7 +95,7 @@ class EmployeeController extends Controller
      */
     public function update(EmployeeUpdateRequest $request, Employee $employee)
     {
-        $employee->fill($request->safe()->except(['image']));
+        $data = $request->safe()->except(['image']);
 
         if ($request->file('image')) {
             if ($employee->image) {
@@ -113,11 +112,11 @@ class EmployeeController extends Controller
                 'public_id' => $upload_path,
             ]);
 
-            $employee->image = $result->getPublicId();
-            $employee->image_url = $result->getSecurePath();
+            $data['image'] = $result->getPublicId();
+            $data['image_url'] = $result->getSecurePath();
         }
 
-        $employee->save();
+        $this->employeeRepository->update($employee->id, $data);
 
         $notification = [
             'message' => 'Employee updated successfully',
@@ -130,13 +129,9 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Employee $employee)
+    public function destroy(string $id)
     {
-        if ($employee->image) {
-            Storage::disk('cloudinary')->delete($employee->image);
-        }
-
-        $employee->delete();
+        $this->employeeRepository->delete($id);
 
         $notification = [
             'message' => 'Employee deleted successfully',
