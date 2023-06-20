@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Backend\EmployeeController;
+use App\Http\Controllers\Backend\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,8 @@ Route::middleware('auth')->group(function () {
 
 
     Route::resource('employees', EmployeeController::class);
+
+    Route::resource('customers', CustomerController::class);
 });
 
 Route::get('logout', [AuthenticatedSessionController::class, 'logoutPage']);

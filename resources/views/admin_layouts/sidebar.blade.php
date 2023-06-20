@@ -39,6 +39,24 @@
                             </li>
 
                             <li>
+                                <a href="#sidebarEcommerce" data-bs-toggle="collapse">
+                                    <i class="mdi mdi-cart-outline"></i>
+                                    <span> Customer Manage </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarEcommerce">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('customers.index') }}">All Customers</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('customers.create') }}">Add Customer</a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
                                 <a href="#sidebarCrm" data-bs-toggle="collapse">
                                     <i class="mdi mdi-account-multiple-outline"></i>
                                     <span> CRM </span>

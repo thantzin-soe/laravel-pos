@@ -11,10 +11,10 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Add Employee</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Add Customer</a></li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Add Employee</h4>
+                        <h4 class="page-title">Add Customer</h4>
                     </div>
                 </div>
             </div>     
@@ -26,13 +26,13 @@
                     <div class="card">
                         <div class="card-body">
 							<div class="tab-pane" id="settings">
-                                <form method="POST" action="{{ route('employees.store') }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('customers.store') }}" enctype="multipart/form-data">
                                 	@csrf
-                                    <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle me-1"></i> Employee Info</h5>
+                                    <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle me-1"></i> Customer Info</h5>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="name" class="form-label">Employee Name</label>
+                                                <label for="name" class="form-label">Customer Name</label>
                                                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
                                         		@error('name')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -41,7 +41,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="email" class="form-label">Employee Email</label>
+                                                <label for="email" class="form-label">Customer Email</label>
                                                 <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}">
                                         		@error('email')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -51,7 +51,7 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="phone" class="form-label">Employee Phone</label>
+                                                <label for="phone" class="form-label">Customer Phone</label>
                                                 <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone') }}">
                                        		 	@error('phone')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -61,7 +61,7 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="address" class="form-label">Employee Address</label>
+                                                <label for="address" class="form-label">Customer Address</label>
                                                 <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}">
                                                 @error('address')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -71,15 +71,9 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="experience" class="form-label">Employee Experience</label>
-                                                <select class="form-control @error('experience') is-invalid @enderror" id="experience" name="experience">
-                                                    <option value="1" {{ old('experience') == 1 ? "selected" : "" }}>1 Year</option>
-                                                    <option value="2" {{ old('experience') == 2 ? "selected" : "" }}>2 Year</option>
-                                                    <option value="3" {{ old('experience') == 3 ? "selected" : "" }}>3 Year</option>
-                                                    <option value="4" {{ old('experience') == 4 ? "selected" : "" }}>4 Year</option>
-                                                    <option value="5" {{ old('experience') == 5 ? "selected" : "" }}>5 Year</option>
-                                                </select>
-                                                @error('experience')
+                                                <label for="shopname" class="form-label">Customer Shop Name</label>
+                                                <input type="text" class="form-control @error('shopname') is-invalid @enderror" id="shopname" name="shopname" value="{{ old('shopname') }}">
+                                                @error('shopname')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -88,9 +82,9 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="salary" class="form-label">Employee Salary</label>
-                                                <input type="text" class="form-control @error('salary') is-invalid @enderror" id="salary" name="salary" value="{{ old('salary') }}">
-                                                @error('salary')
+                                                <label for="account_holder" class="form-label">Account Holder</label>
+                                                <input type="text" class="form-control @error('account_holder') is-invalid @enderror" id="account_holder" name="account_holder" value="{{ old('account_holder') }}">
+                                                @error('account_holder')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -98,9 +92,9 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="vacation" class="form-label">Employee Vacation</label>
-                                                <input type="text" class="form-control @error('vacation') is-invalid @enderror" id="vacation" name="vacation" value="{{ old('vacation') }}">
-                                                @error('vacation')
+                                                <label for="account_number" class="form-label">Account Number</label>
+                                                <input type="text" class="form-control @error('account_number') is-invalid @enderror" id="account_number" name="account_number" value="{{ old('account_number') }}">
+                                                @error('account_number')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -109,7 +103,28 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="city" class="form-label">Employee City</label>
+                                                <label for="bank_name" class="form-label">Bank Name</label>
+                                                <input type="text" class="form-control @error('bank_name') is-invalid @enderror" id="bank_name" name="bank_name" value="{{ old('bank_name') }}">
+                                                @error('bank_name')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div> <!-- end col -->
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="bank_branch" class="form-label">Bank Branch</label>
+                                                <input type="text" class="form-control @error('bank_branch') is-invalid @enderror" id="bank_branch" name="bank_branch" value="{{ old('bank_branch') }}">
+                                                @error('bank_branch')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div> <!-- end col -->
+
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="city" class="form-label">Customer City</label>
                                                 <input type="text" class="form-control @error('city') is-invalid @enderror" id="city" name="city" value="{{ old('city') }}">
                                                 @error('city')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -122,7 +137,7 @@
                                     <div class="row">
                                     	<div class="col-md-12">
                                     		<div class="mb-3">
-                                                <label for="image" class="form-label">Employee Image</label>
+                                                <label for="image" class="form-label">Customer Image</label>
                                                 <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
                                         		@error('image')
                                                     <span class="text-danger">{{ $message }}</span>
