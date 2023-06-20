@@ -27,8 +27,8 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            
-                            <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+
+                            <table class="table dt-responsive nowrap w-100 employee_datatable" >
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -39,33 +39,8 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                            
-                            
                                 <tbody>
-                                @php
-                                    $key = 1;
-                                @endphp
-                                @foreach($employees as $employee)
-                                    <tr>
-                                        <td>{{ $key++; }}</td>
-                                        <td>
-                                            <img src="{{ $employee->image_url }}" style="width:50px;height:40px">
-                                        </td>
-                                        <td>{{ $employee->email }}</td>
-                                        <td>{{ $employee->phone }}</td>
-                                        <td>{{ $employee->salary }}</td>
-                                        <td>
-                                            <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
-                                            <form class="employee-delete-{{ $employee->id }}" style="display:inline" method="POST" action="{{ route('employees.destroy', $employee->id) }}">
-                                                @csrf
-                                                @method("DELETE")
-                                                <button id="delete" data-form="employee-delete-{{ $employee->id }}" type="submit" class="btn btn-danger rounded-pill waves-effect waves-light">Delete</button>
-                                            </form>
-                                            
-                                        </td>
-                                    </tr>
-                                @endforeach
-
+                                    
                                 </tbody>
                             </table>
 
@@ -78,4 +53,34 @@
         </div> <!-- container -->
 
     </div> <!-- content -->
+@endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        $(function () {
+            var table = $('.employee_datatable').DataTable({
+                language: {
+                    paginate: {
+                        previous: "<i class='mdi mdi-chevron-left'>",
+                        next: "<i class='mdi mdi-chevron-right'>"
+                    }
+                },
+                drawCallback: function() {
+                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
+                    $(".dataTables_wrapper .row:last-of-type").addClass("mt-3");
+                },
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('employees.index') }}",
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'image', name: 'image', orderable: false, searchable: false},
+                    {data: 'email', name: 'email', orderable: false},
+                    {data: 'phone', name: 'phone', orderable: false},
+                    {data: 'salary', name: 'salary'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
+      });
+</script>
 @endsection

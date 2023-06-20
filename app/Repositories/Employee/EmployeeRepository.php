@@ -5,6 +5,7 @@ namespace App\Repositories\Employee;
 use App\Models\Employee;
 use App\Repositories\Employee\EmployeeRepositoryInterface;
 use App\Repositories\BaseRepository;
+use DataTables;
 
 /**
  * Class EmployeeRepository.
@@ -29,5 +30,18 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
     public function getAll()
     {
         return $this->model->all();
+    }
+
+    public function getDataTable()
+    {
+        return Datatables::of($this->model->orderBy('id', 'DESC'))->addIndexColumn()
+                ->addColumn('action', function (Employee $employee) {
+                    return view('backend.employee.datatable.action')->with('employee', $employee);
+                })
+                ->editColumn('image', function (Employee $employee) {
+                    return "<img src='".$employee->image_url."' style='width:50px;height:40px'>";
+                })
+                ->rawColumns(['action', 'image'])
+                ->make(true);
     }
 }

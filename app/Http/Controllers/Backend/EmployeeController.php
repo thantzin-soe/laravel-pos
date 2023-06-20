@@ -10,6 +10,7 @@ use App\Repositories\Employee\EmployeeRepositoryInterface;
 use Image;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Storage;
+use DataTables;
 
 class EmployeeController extends Controller
 {
@@ -23,9 +24,13 @@ class EmployeeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('backend.employee.index')->with('employees', $this->employeeRepository->getAll());
+        if ($request->ajax()) {
+            return $this->employeeRepository->getDataTable();
+        }
+
+        return view('backend.employee.index');
     }
 
     /**

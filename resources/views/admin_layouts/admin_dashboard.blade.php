@@ -101,7 +101,7 @@
         <!-- third party js ends -->
 
         <!-- Datatables init -->
-        <script src="{{ asset('backend/assets/js/pages/datatables.init.js') }}"></script>
+        {{-- <script src="{{ asset('backend/assets/js/pages/datatables.init.js') }}"></script> --}}
 
         <!-- App js-->
         <script src="{{ asset('backend/assets/js/app.min.js') }}"></script>
@@ -134,5 +134,7 @@
          }
         @endif 
         </script>
+
+        @yield('scripts')
     </body>
 </html>
