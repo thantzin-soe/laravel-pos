@@ -20,12 +20,12 @@
                             <li class="menu-title mt-2">Apps</li>
 
                             <li>
-                                <a href="#sidebarEcommerce" data-bs-toggle="collapse">
+                                <a href="#sidebarEmployee" data-bs-toggle="collapse">
                                     <i class="mdi mdi-cart-outline"></i>
                                     <span> Employee Manage </span>
                                     <span class="menu-arrow"></span>
                                 </a>
-                                <div class="collapse" id="sidebarEcommerce">
+                                <div class="collapse" id="sidebarEmployee">
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="{{ route('employees.index') }}">All Employees</a>
@@ -39,12 +39,12 @@
                             </li>
 
                             <li>
-                                <a href="#sidebarEcommerce" data-bs-toggle="collapse">
+                                <a href="#sidebarCustomer" data-bs-toggle="collapse">
                                     <i class="mdi mdi-cart-outline"></i>
                                     <span> Customer Manage </span>
                                     <span class="menu-arrow"></span>
                                 </a>
-                                <div class="collapse" id="sidebarEcommerce">
+                                <div class="collapse" id="sidebarCustomer">
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="{{ route('customers.index') }}">All Customers</a>
@@ -56,6 +56,45 @@
                                     </ul>
                                 </div>
                             </li>
+
+                            <li>
+                                <a href="#sidebarSupplier" data-bs-toggle="collapse">
+                                    <i class="mdi mdi-cart-outline"></i>
+                                    <span> Supplier Manage </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarSupplier">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('suppliers.index') }}">All Suppliers</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('suppliers.create') }}">Add Supplier</a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li>
+                                <a href="#sidebarSalary" data-bs-toggle="collapse">
+                                    <i class="mdi mdi-cart-outline"></i>
+                                    <span> Employee Salary </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarSalary">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('advance_salaries.create') }}">Add Advance Salary</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('advance_salaries.index') }}">All Advance Salary</a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </li>
+
                             <li>
                                 <a href="#sidebarCrm" data-bs-toggle="collapse">
                                     <i class="mdi mdi-account-multiple-outline"></i>

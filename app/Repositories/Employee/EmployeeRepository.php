@@ -33,6 +33,11 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
         return $this->model->all();
     }
 
+    public function findByName($name)
+    {
+        return $this->model->where('name', 'LIKE', "$name%")->get();
+    }
+
     public function getDataTable()
     {
         return Datatables::of($this->model->orderBy('id', 'DESC'))->addIndexColumn()

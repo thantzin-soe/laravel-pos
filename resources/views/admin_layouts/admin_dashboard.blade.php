@@ -13,8 +13,7 @@
         <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico') }}">
 
         <!-- Plugins css -->
-        <link href="{{ asset('backend/assets/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('backend/assets/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('backend/assets/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
         
         <!-- Bootstrap css -->
         <link href="{{ asset('backend/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -34,7 +33,13 @@
         <link href="{{ asset('backend/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('backend/assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('backend/assets/libs/datatables.net-select-bs5/css//select.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('backend/assets/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
+
         <!-- third party css end -->
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+        @yield('styles')
     </head>
 
     <!-- body start -->
@@ -98,10 +103,13 @@
         <script src="{{ asset('backend/assets/libs/datatables.net-select/js/dataTables.select.min.js') }}"></script>
         <script src="{{ asset('backend/assets/libs/pdfmake/build/pdfmake.min.js') }}"></script>
         <script src="{{ asset('backend/assets/libs/pdfmake/build/vfs_fonts.js') }}"></script>
+        <script src="{{ asset('backend/assets/libs/selectize/js/standalone/selectize.min.js') }}"></script>
+
         <!-- third party js ends -->
 
-        <!-- Datatables init -->
-        {{-- <script src="{{ asset('backend/assets/js/pages/datatables.init.js') }}"></script> --}}
+        <!-- Vendor js -->
+        <script src="{{ asset('backend/assets/libs/select2/js/select2.min.js') }}"></script>
+
 
         <!-- App js-->
         <script src="{{ asset('backend/assets/js/app.min.js') }}"></script>
@@ -134,6 +142,8 @@
          }
         @endif 
         </script>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 
         @yield('scripts')
     </body>

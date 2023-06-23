@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Backend\EmployeeController;
 use App\Http\Controllers\Backend\CustomerController;
+use App\Http\Controllers\Backend\SupplierController;
+use App\Http\Controllers\Backend\AdvanceSalaryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,9 +36,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/password-change', [PasswordController::class, 'passwordChange'])->name('password.edit');
 
 
+    Route::get('employees/search', [EmployeeController::class, 'search'])->name('employees.search');
     Route::resource('employees', EmployeeController::class);
 
     Route::resource('customers', CustomerController::class);
+
+    Route::resource('suppliers', SupplierController::class);
+
+    Route::resource('advance_salaries', AdvanceSalaryController::class);
 });
 
 Route::get('logout', [AuthenticatedSessionController::class, 'logoutPage']);

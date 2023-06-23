@@ -4,22 +4,20 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\Employee\EmployeeStoreRequest;
-use App\Http\Requests\Employee\EmployeeUpdateRequest;
-use App\Repositories\Employee\EmployeeRepositoryInterface;
+use App\Repositories\Supplier\SupplierRepositoryInterface;
+use App\Http\Requests\Supplier\SupplierStoreRequest;
+use App\Http\Requests\Supplier\SupplierUpdateRequest;
 use Image;
-use App\Models\Employee;
+use App\Models\Supplier;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Log;
-use DataTables;
 
-class EmployeeController extends Controller
+class SupplierController extends Controller
 {
-    private $employeeRepository;
+    private $supplierRepository;
 
-    public function __construct(EmployeeRepositoryInterface $employeeRepository)
+    public function __construct(SupplierRepositoryInterface $supplierRepository)
     {
-        $this->employeeRepository = $employeeRepository;
+        $this->supplierRepository = $supplierRepository;
     }
 
     /**
@@ -28,17 +26,10 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            return $this->employeeRepository->getDataTable();
+            return $this->supplierRepository->getDataTable();
         }
 
-        return view('backend.employee.index');
-    }
-
-    public function search(Request $request)
-    {
-        $data = $this->employeeRepository->findByName($request->q);
-
-        return response()->json($data);
+        return view('backend.supplier.index');
     }
 
     /**
@@ -46,13 +37,13 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('backend.employee.create');
+        return view('backend.supplier.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(EmployeeStoreRequest $request)
+    public function store(SupplierStoreRequest $request)
     {
         $data = $request->safe()->except(['image']);
 
@@ -60,7 +51,7 @@ class EmployeeController extends Controller
             $file = $request->file('image');
             $filename = time().'-'.pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
 
-            $upload_path = 'employee_images/'.$filename;
+            $upload_path = 'supplier_images/'.$filename;
 
             $image = Image::make($file)->resize(300, 300)->encode('data-url');
 
@@ -72,47 +63,47 @@ class EmployeeController extends Controller
             $data['image_url'] = $result->getSecurePath();
         }
 
-        $this->employeeRepository->create($data);
+        $this->supplierRepository->create($data);
 
         $notification = [
-            'message' => 'New employee created successfully',
+            'message' => 'New supplier created successfully',
             'alert-type' => 'success'
         ];
 
-        return redirect()->route('employees.index')->with($notification);
+        return redirect()->route('suppliers.index')->with($notification);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Supplier $supplier)
     {
-        //
+        return view('backend.supplier.show', compact('supplier'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Employee $employee)
+    public function edit(Supplier $supplier)
     {
-        return view('backend.employee.edit', compact('employee'));
+        return view('backend.supplier.edit', compact('supplier'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(EmployeeUpdateRequest $request, Employee $employee)
+    public function update(SupplierUpdateRequest $request, Supplier $supplier)
     {
         $data = $request->safe()->except(['image']);
 
         if ($request->file('image')) {
-            if ($employee->image) {
-                Storage::disk('cloudinary')->delete($employee->image);
+            if ($supplier->image) {
+                Storage::disk('cloudinary')->delete($supplier->image);
             }
             $file = $request->file('image');
             $filename = time().'-'.pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
 
-            $upload_path = 'employee_images/'.$filename;
+            $upload_path = 'supplier_images/'.$filename;
 
             $image = Image::make($file)->resize(300, 300)->encode('data-url');
 
@@ -124,14 +115,14 @@ class EmployeeController extends Controller
             $data['image_url'] = $result->getSecurePath();
         }
 
-        $this->employeeRepository->update($employee->id, $data);
+        $this->supplierRepository->update($supplier->id, $data);
 
         $notification = [
-            'message' => 'Employee updated successfully',
+            'message' => 'Supplier updated successfully',
             'alert-type' => 'success'
         ];
 
-        return redirect()->route('employees.index')->with($notification);
+        return redirect()->route('suppliers.index')->with($notification);
     }
 
     /**
@@ -139,13 +130,13 @@ class EmployeeController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->employeeRepository->delete($id);
+        $this->supplierRepository->delete($id);
 
         $notification = [
-            'message' => 'Employee deleted successfully',
+            'message' => 'Supplier deleted successfully',
             'alert-type' => 'success'
         ];
 
-        return redirect()->route('employees.index')->with($notification);
+        return redirect()->route('suppliers.index')->with($notification);
     }
 }
