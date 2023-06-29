@@ -77,7 +77,7 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="code" class="form-label">Product Code</label>
-                                                <input type="text" class="form-control @error('code') is-invalid @enderror" id="code" name="code" value="{{ $product->code }}">
+                                                <input type="text" class="form-control @error('code') is-invalid @enderror" id="code" name="code" value="{{ $product->code }}" readonly>
                                         		@error('code')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror

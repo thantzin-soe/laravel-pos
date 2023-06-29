@@ -150,4 +150,11 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with($notification);
     }
+
+    public function generateBarCode(Product $product)
+    {
+        $generator = new \Picqer\Barcode\BarcodeGeneratorHTML();
+        $barcode = $generator->getBarcode($product->code, $generator::TYPE_CODE_128);
+        return view('backend.product.barcode', compact('product', 'barcode'));
+    }
 }

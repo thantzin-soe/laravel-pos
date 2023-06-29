@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class ProductStoreRequest extends FormRequest
 {
@@ -36,13 +37,19 @@ class ProductStoreRequest extends FormRequest
         ];
     }
 
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'code' => IdGenerator::generate(['table' => 'products', 'field' => 'code', 'length' => 4, 'prefix' => 'PC'])
+        ]);
+    }
+
     public function messages()
     {
         return [
             "name.required" => "The product name is required.",
             "category_id.required" => "The category field is required.",
             "supplier_id.required" => "The supplier field is required.",
-            "code.required" => "The code field is required.",
             "garage.required" => "The garage field is required.",
             "store.required" => "The store field is required.",
             "buying_date.required" => "The buying date field is required.",

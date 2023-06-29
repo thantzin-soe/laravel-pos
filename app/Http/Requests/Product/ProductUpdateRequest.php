@@ -42,7 +42,7 @@ class ProductUpdateRequest extends FormRequest
             "name.required" => "The product name is required.",
             "category_id.required" => "The category field is required.",
             "supplier_id.required" => "The supplier field is required.",
-            "code.required" => "The code field is required.",
+            "code.required" => "The product code field is required.",
             "garage.required" => "The garage field is required.",
             "store.required" => "The store field is required.",
             "buying_date.required" => "The buying date field is required.",

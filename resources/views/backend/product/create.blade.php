@@ -73,7 +73,7 @@
                                             </div>
                                         </div> <!-- end col -->
 
-                                        <div class="col-md-6">
+                                        {{-- <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="code" class="form-label">Product Code</label>
                                                 <input type="text" class="form-control @error('code') is-invalid @enderror" id="code" name="code" value="{{ old('code') }}">
@@ -81,7 +81,7 @@
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
-                                        </div> <!-- end col -->
+                                        </div> <!-- end col --> --}}
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
