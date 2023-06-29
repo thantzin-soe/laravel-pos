@@ -144,6 +144,9 @@
                                         <li>
                                             <a href="{{ route('products.create') }}">Add Product</a>
                                         </li>
+                                        <li>
+                                            <a href="{{ route('products.import') }}">Import Products</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>

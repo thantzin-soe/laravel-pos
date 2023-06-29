@@ -51,7 +51,14 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                 ->editColumn('image', function (Product $product) {
                     return "<img src='".$product->image_url."' style='width:50px;height:40px'>";
                 })
-                ->rawColumns(['action', 'image'])
+                ->addColumn('status', function (Product $product) {
+                    if ($product->expire_date < now()->format('Y-m-d')) {
+                        return "<div class='badge bg-danger'>Invalid</div>";
+                    } else {
+                        return "<div class='badge bg-success'>Valid</div>";
+                    }
+                })
+                ->rawColumns(['action', 'image', 'status'])
                 ->make(true);
     }
 

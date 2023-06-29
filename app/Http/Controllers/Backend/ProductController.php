@@ -11,6 +11,9 @@ use App\Repositories\Supplier\SupplierRepositoryInterface;
 use App\Http\Requests\Product\ProductStoreRequest;
 use App\Http\Requests\Product\ProductUpdateRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Exports\ProductExport;
+use App\Imports\ProductImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Image;
 
 class ProductController extends Controller
@@ -156,5 +159,33 @@ class ProductController extends Controller
         $generator = new \Picqer\Barcode\BarcodeGeneratorHTML();
         $barcode = $generator->getBarcode($product->code, $generator::TYPE_CODE_128);
         return view('backend.product.barcode', compact('product', 'barcode'));
+    }
+
+
+    public function importProductForm()
+    {
+        return view('backend.product.import');
+    }
+
+
+    public function importProduct(Request $request)
+    {
+        $request->validate([
+            'import_file' => ['required']
+        ]);
+
+        Excel::import(new ProductImport(), $request->file('import_file'));
+
+        $notification = [
+            'message' => 'Product imported successfully',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('products.index')->with($notification);
+    }
+
+    public function exportProduct()
+    {
+        return Excel::download(new ProductExport(), 'products.xlsx');
     }
 }

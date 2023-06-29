@@ -63,6 +63,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
     Route::get('barcode/products/{product}', [ProductController::class, 'generateBarCode'])->name('products.code');
+    Route::get('imports/products', [ProductController::class, 'importProductForm'])->name('products.import');
+    Route::post('imports/products', [ProductController::class, 'importProduct'])->name('products.import');
+    Route::post('exports/products', [ProductController::class, 'exportProduct'])->name('products.export');
 });
 
 Route::get('logout', [AuthenticatedSessionController::class, 'logoutPage']);

@@ -13,6 +13,14 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item active">
+                                    <a href="{{ route('products.import') }}" class="btn btn-info rounded-pill waves-effect waves-light">Import</a>
+
+                                    <form action="{{ route('products.export') }}" method="POST" style="display:inline;">
+                                        @csrf
+
+                                        <input type="submit" value="Export" class="btn btn-danger rounded-pill waves-effect waves-light"/>
+                                    </form> 
+
                                     <a href="{{ route('products.create') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Product</a>
                                 </li>
                             </ol>
@@ -38,6 +46,7 @@
                                         <th>Supplier</th>
                                         <th>Code</th>
                                         <th>Price</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -82,6 +91,7 @@
                     {data: 'supplier.name', name: 'supplier.name'},
                     {data: 'code', name: 'code'},
                     {data: 'selling_price', name: 'selling_price'},
+                    {data: 'status', name: 'status'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });
