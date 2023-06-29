@@ -131,6 +131,24 @@
                             </li>
 
                             <li>
+                                <a href="#sidebarProduct" data-bs-toggle="collapse">
+                                    <i class="mdi mdi-cart-outline"></i>
+                                    <span> Product </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarProduct">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('products.index') }}">All Product</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('products.create') }}">Add Product</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li>
                                 <a href="#sidebarCrm" data-bs-toggle="collapse">
                                     <i class="mdi mdi-account-multiple-outline"></i>
                                     <span> CRM </span>

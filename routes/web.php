@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\AdvanceSalaryController;
 use App\Http\Controllers\Backend\PaySalaryController;
 use App\Http\Controllers\Backend\AttendanceController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::resource('categories', CategoryController::class);
+    Route::resource('products', ProductController::class);
 });
 
 Route::get('logout', [AuthenticatedSessionController::class, 'logoutPage']);

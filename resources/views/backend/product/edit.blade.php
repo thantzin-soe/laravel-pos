@@ -11,10 +11,10 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Add Supplier</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Edit Product</a></li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Add Supplier</h4>
+                        <h4 class="page-title">Edit Product</h4>
                     </div>
                 </div>
             </div>     
@@ -26,89 +26,32 @@
                     <div class="card">
                         <div class="card-body">
 							<div class="tab-pane" id="settings">
-                                <form method="POST" action="{{ route('suppliers.store') }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('products.update', $product->id) }}" enctype="multipart/form-data">
                                 	@csrf
-                                    <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle me-1"></i> Supplier Info</h5>
+                                    @method("PUT")
+                                    <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle me-1"></i> Product Info</h5>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="name" class="form-label">Supplier Name</label>
-                                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
+                                                <label for="name" class="form-label">Product Name</label>
+                                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $product->name }}">
                                         		@error('name')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="email" class="form-label">Supplier Email</label>
-                                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}">
-                                        		@error('email')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div> <!-- end col -->
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="phone" class="form-label">Supplier Phone</label>
-                                                <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone') }}">
-                                       		 	@error('phone')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div> <!-- end col -->
+                                                <label for="category_id" class="form-label">Category</label>
+                                                <select class="form-control @error('category_id') is-invalid @enderror" id="category_id" name="category_id">
+                                                    <option value="">Select Category</option>
 
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="address" class="form-label">Supplier Address</label>
-                                                <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}">
-                                                @error('address')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div> <!-- end col -->
-
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="shopname" class="form-label">Supplier Shop Name</label>
-                                                <input type="text" class="form-control @error('shopname') is-invalid @enderror" id="shopname" name="shopname" value="{{ old('shopname') }}">
-                                                @error('shopname')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div> <!-- end col -->
-
-
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="type" class="form-label">Supplier Type</label>
-                                                <select class="form-control @error('type') is-invalid @enderror" id="type" name="type">
-                                                    <option selected disabled>Select Type</option>
-                                                    <option value="Distributor" {{ old('type') == "Distributor" ? "selected" : "" }}>Distributor</option>
-                                                    <option value="Whole Seller" {{ old('type') == "Whole Seller" ? "selected" : "" }}>Whole Seller</option>
+                                                    @foreach($categories as $category)
+                                                        <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? "selected" : "" }}>{{ $category->name }}</option>
+                                                    @endforeach
                                                 </select>
-                                                @error('type')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div> <!-- end col -->
-
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="account_holder" class="form-label">Account Holder</label>
-                                                <input type="text" class="form-control @error('account_holder') is-invalid @enderror" id="account_holder" name="account_holder" value="{{ old('account_holder') }}">
-                                                @error('account_holder')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div> <!-- end col -->
-
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="account_number" class="form-label">Account Number</label>
-                                                <input type="text" class="form-control @error('account_number') is-invalid @enderror" id="account_number" name="account_number" value="{{ old('account_number') }}">
-                                                @error('account_number')
+                                                @error('category_id')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -117,9 +60,15 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="bank_name" class="form-label">Bank Name</label>
-                                                <input type="text" class="form-control @error('bank_name') is-invalid @enderror" id="bank_name" name="bank_name" value="{{ old('bank_name') }}">
-                                                @error('bank_name')
+                                                <label for="supplier_id" class="form-label">Supplier</label>
+                                                <select class="form-control @error('supplier_id') is-invalid @enderror" id="supplier_id" name="supplier_id">
+                                                    <option value="">Select Supplier</option>
+
+                                                    @foreach($suppliers as $supplier)
+                                                        <option value="{{ $supplier->id }}" {{ $product->supplier_id == $supplier->id ? "selected" : "" }}>{{ $supplier->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('supplier_id')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -127,9 +76,31 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="bank_branch" class="form-label">Bank Branch</label>
-                                                <input type="text" class="form-control @error('bank_branch') is-invalid @enderror" id="bank_branch" name="bank_branch" value="{{ old('bank_branch') }}">
-                                                @error('bank_branch')
+                                                <label for="code" class="form-label">Product Code</label>
+                                                <input type="text" class="form-control @error('code') is-invalid @enderror" id="code" name="code" value="{{ $product->code }}">
+                                        		@error('code')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div> <!-- end col -->
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="garage" class="form-label">Product Garage</label>
+                                                <input type="text" class="form-control @error('garage') is-invalid @enderror" id="garage" name="garage" value="{{ $product->garage }}">
+                                       		 	@error('garage')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div> <!-- end col -->
+
+
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="store" class="form-label">Product Store</label>
+                                                <input type="text" class="form-control @error('store') is-invalid @enderror" id="store" name="store" value="{{ $product->store }}">
+                                                @error('store')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -138,20 +109,53 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="city" class="form-label">Supplier City</label>
-                                                <input type="text" class="form-control @error('city') is-invalid @enderror" id="city" name="city" value="{{ old('city') }}">
-                                                @error('city')
+                                                <label for="buying_date" class="form-label">Buying Date</label>
+                                                <input type="date" class="form-control @error('buying_date') is-invalid @enderror" id="buying_date" name="buying_date" value="{{ $product->buying_date }}">
+                                                @error('buying_date')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div> <!-- end col -->
+
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="expire_date" class="form-label">Expire Date</label>
+                                                <input type="date" class="form-control @error('expire_date') is-invalid @enderror" id="expire_date" name="expire_date" value="{{ $product->expire_date }}">
+                                                @error('expire_date')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div> <!-- end col -->
+
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="buying_price" class="form-label">Buying Price</label>
+                                                <input type="text" class="form-control @error('buying_price') is-invalid @enderror" id="buying_price" name="buying_price" value="{{ $product->buying_price }}">
+                                                @error('buying_price')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div> <!-- end col -->
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="selling_price" class="form-label">Selling Price</label>
+                                                <input type="text" class="form-control @error('selling_price') is-invalid @enderror" id="selling_price" name="selling_price" value="{{ $product->selling_price }}">
+                                                @error('selling_price')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div> <!-- end col -->
+
 
                                     </div> <!-- end row -->
 
                                     <div class="row">
                                     	<div class="col-md-12">
                                     		<div class="mb-3">
-                                                <label for="image" class="form-label">Supplier Image</label>
+                                                <label for="image" class="form-label">Product Image</label>
                                                 <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
                                         		@error('image')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -163,7 +167,7 @@
                                     <div class="row">
                                     	<div class="col-md-12">
                                     		<div class="mb-3">
-                                                <img src="{{ config('app.cloudinary_no_image_url') }}" id="showImage" class="rounded-circle avatar-lg img-thumbnail" alt="profile image">
+                                                <img src="{{ $product->image_url ?? config('app.cloudinary_no_image_url') }}" id="showImage" class="rounded-circle avatar-lg img-thumbnail" alt="product image">
                                             </div>
                                     	</div>
                                     </div>
