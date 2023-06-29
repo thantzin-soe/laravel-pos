@@ -90,10 +90,30 @@
                                         <li>
                                             <a href="{{ route('advance_salaries.index') }}">All Advance Salary</a>
                                         </li>
+                                        <li>
+                                            <a href="{{ route('salaries.index') }}">Pay Salary</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li>
+                                <a href="#sidebarAttendance" data-bs-toggle="collapse">
+                                    <i class="mdi mdi-cart-outline"></i>
+                                    <span> Employee Attendance </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarAttendance">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('attendances.index') }}">Employee Attendance List</a>
+                                        </li>
                                         
                                     </ul>
                                 </div>
                             </li>
+
+
 
                             <li>
                                 <a href="#sidebarCrm" data-bs-toggle="collapse">

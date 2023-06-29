@@ -75,7 +75,7 @@
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'image', name: 'image', orderable: false, searchable: false},
-                    {data: 'email', name: 'email', orderable: false},
+                    {data: 'name', name: 'name', orderable: false},
                     {data: 'phone', name: 'phone', orderable: false},
                     {data: 'salary', name: 'salary'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},

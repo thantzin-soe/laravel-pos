@@ -8,6 +8,8 @@ use App\Http\Controllers\Backend\EmployeeController;
 use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Backend\SupplierController;
 use App\Http\Controllers\Backend\AdvanceSalaryController;
+use App\Http\Controllers\Backend\PaySalaryController;
+use App\Http\Controllers\Backend\AttendanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +46,17 @@ Route::middleware('auth')->group(function () {
     Route::resource('suppliers', SupplierController::class);
 
     Route::resource('advance_salaries', AdvanceSalaryController::class);
+
+    Route::controller(PaySalaryController::class)->group(function () {
+        Route::get('salaries', 'index')->name('salaries.index');
+        Route::get('pay/salaries/{year}/{month}/{employee}', 'paySalary')->name('salaries.pay');
+        Route::post('pay/salaries/{employee}', 'paidSalary')->name('salaries.paid');
+    });
+
+    Route::controller(AttendanceController::class)->group(function () {
+        Route::get('attendances', 'index')->name('attendances.index');
+        Route::post('attendances', 'save')->name('attendances.save');
+    });
 });
 
 Route::get('logout', [AuthenticatedSessionController::class, 'logoutPage']);

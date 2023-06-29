@@ -30,7 +30,7 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
 
     public function getAll()
     {
-        return $this->model->all();
+        return $this->model->orderBy('id', 'DESC')->get();
     }
 
     public function findByName($name)
@@ -40,7 +40,8 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
 
     public function getDataTable()
     {
-        return Datatables::of($this->model->orderBy('id', 'DESC'))->addIndexColumn()
+        return Datatables::of($this->model->orderBy('id', 'DESC'))
+                ->addIndexColumn()
                 ->addColumn('action', function (Employee $employee) {
                     return view('backend.employee.datatable.action')->with('employee', $employee);
                 })
