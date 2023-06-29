@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\SupplierController;
 use App\Http\Controllers\Backend\AdvanceSalaryController;
 use App\Http\Controllers\Backend\PaySalaryController;
 use App\Http\Controllers\Backend\AttendanceController;
+use App\Http\Controllers\Backend\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,8 @@ Route::middleware('auth')->group(function () {
         Route::get('attendances', 'index')->name('attendances.index');
         Route::post('attendances', 'save')->name('attendances.save');
     });
+
+    Route::resource('categories', CategoryController::class);
 });
 
 Route::get('logout', [AuthenticatedSessionController::class, 'logoutPage']);

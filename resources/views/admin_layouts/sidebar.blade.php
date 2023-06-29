@@ -97,6 +97,7 @@
                                 </div>
                             </li>
 
+
                             <li>
                                 <a href="#sidebarAttendance" data-bs-toggle="collapse">
                                     <i class="mdi mdi-cart-outline"></i>
@@ -113,7 +114,21 @@
                                 </div>
                             </li>
 
-
+                            <li>
+                                <a href="#sidebarCategory" data-bs-toggle="collapse">
+                                    <i class="mdi mdi-cart-outline"></i>
+                                    <span> Category </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarCategory">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('categories.index') }}">All Category</a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </li>
 
                             <li>
                                 <a href="#sidebarCrm" data-bs-toggle="collapse">
