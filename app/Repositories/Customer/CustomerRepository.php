@@ -28,6 +28,11 @@ class CustomerRepository extends BaseRepository implements CustomerRepositoryInt
         return $this->model->paginate($size);
     }
 
+    public function findByName($name)
+    {
+        return $this->model->where('name', 'LIKE', "$name%")->get();
+    }
+
     public function getAll()
     {
         return $this->model->all();

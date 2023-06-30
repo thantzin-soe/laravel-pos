@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\AttendanceController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ExpenseController;
+use App\Http\Controllers\Backend\PosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::get('employees/search', [EmployeeController::class, 'search'])->name('employees.search');
     Route::resource('employees', EmployeeController::class);
 
+    Route::get('customers/search', [CustomerController::class, 'search'])->name('customers.search');
     Route::resource('customers', CustomerController::class);
 
     Route::resource('suppliers', SupplierController::class);
@@ -77,6 +79,11 @@ Route::middleware('auth')->group(function () {
         Route::get('expenses/today', 'todayExpense')->name('expenses.today');
         Route::get('expenses/montly', 'monthlyExpense')->name('expenses.monthly');
         Route::get('expenses/yearly', 'yearlyExpense')->name('expenses.yearly');
+    });
+
+
+    Route::controller(PosController::class)->group(function () {
+        Route::get('post', 'pos')->name('pos');
     });
 });
 

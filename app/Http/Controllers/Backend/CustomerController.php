@@ -31,6 +31,13 @@ class CustomerController extends Controller
         return view('backend.customer.index');
     }
 
+    public function search(Request $request)
+    {
+        $data = $this->customerRepository->findByName($request->q);
+
+        return response()->json($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
