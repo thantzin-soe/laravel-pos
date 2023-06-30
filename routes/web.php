@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\PaySalaryController;
 use App\Http\Controllers\Backend\AttendanceController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ExpenseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +67,17 @@ Route::middleware('auth')->group(function () {
     Route::get('imports/products', [ProductController::class, 'importProductForm'])->name('products.import');
     Route::post('imports/products', [ProductController::class, 'importProduct'])->name('products.import');
     Route::post('exports/products', [ProductController::class, 'exportProduct'])->name('products.export');
+
+
+    Route::controller(ExpenseController::class)->group(function () {
+        Route::get('expenses', 'create')->name('expenses.create');
+        Route::post('expenses', 'store')->name('expenses.store');
+        Route::get('expenses/{expense}/edit', 'edit')->name('expenses.edit');
+        Route::put('expenses/{expense}', 'update')->name('expenses.update');
+        Route::get('expenses/today', 'todayExpense')->name('expenses.today');
+        Route::get('expenses/montly', 'monthlyExpense')->name('expenses.monthly');
+        Route::get('expenses/yearly', 'yearlyExpense')->name('expenses.yearly');
+    });
 });
 
 Route::get('logout', [AuthenticatedSessionController::class, 'logoutPage']);
