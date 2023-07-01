@@ -177,6 +177,22 @@
                                 </div>
                             </li>
 
+
+                            <li>
+                                <a href="#sidebarStock" data-bs-toggle="collapse">
+                                    <i class="mdi mdi-cart-outline"></i>
+                                    <span> Stock Management </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarStock">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('stock.manage') }}">Stock</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
                             <li class="menu-title mt-2">Custom</li>
                             <li>
                                 <a href="#sidebarAuth" data-bs-toggle="collapse">

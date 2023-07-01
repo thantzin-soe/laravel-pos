@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\OrderDetails;
 use Cart;
 use DataTables;
@@ -91,6 +92,15 @@ class OrderController extends Controller
             'order_status' => 'complete'
         ]);
 
+
+        $order_items = OrderDetails::where('order_id', $order->id)->get();
+        foreach ($order_items as $item) {
+            $product = Product::where('id', $item->product_id)->first();
+            $product->update([
+                'store' => $product->store - $item->quantity
+            ]);
+        }
+
         $notification = [
             'message' => 'Order completed successfully',
             'alert-type' => 'success'
@@ -118,5 +128,28 @@ class OrderController extends Controller
                 ->make(true);
         }
         return view('backend.order.complete');
+    }
+
+    public function manageStock(Request $request)
+    {
+        if ($request->ajax()) {
+            return Datatables::of(Product::orderBy('id', 'DESC')->with([
+                'category',
+                'supplier'
+            ]))
+                ->addIndexColumn()
+                ->addColumn('action', function (Product $product) {
+                    return view('backend.product.datatable.action')->with('product', $product);
+                })
+                ->editColumn('image', function (Product $product) {
+                    return "<img src='".$product->image_url."' style='width:50px;height:40px'>";
+                })
+                ->editColumn('store', function (Product $product) {
+                    return "<button class='btn btn-warning waves-effect waves-light'>".$product->store."</button>";
+                })
+                ->rawColumns(['action', 'image', 'store'])
+                ->make(true);
+        }
+        return view('backend.stock.index');
     }
 }

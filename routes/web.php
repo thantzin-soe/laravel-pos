@@ -98,6 +98,8 @@ Route::middleware('auth')->group(function () {
         Route::get('orders/completed', 'completedOrders')->name('orders.completed');
         Route::put('orders/{order}', 'update')->name('orders.update');
         Route::get('orders/{order}', 'show')->name('orders.details');
+
+        Route::get('stock', 'manageStock')->name('stock.manage');
     });
 });
 

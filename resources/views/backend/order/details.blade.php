@@ -92,7 +92,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Due Amount</label>
-                                            <p class="text-danger">{{ $order->due }}</p>
+                                            <p class="text-danger">{{ $order->due ?? 0 }}</p>
                                         </div>
                                     </div> <!-- end col -->
                                 </div> <!-- end row -->
