@@ -159,6 +159,24 @@
                                 </div>
                             </li>
 
+                            <li>
+                                <a href="#sidebarOrder" data-bs-toggle="collapse">
+                                    <i class="mdi mdi-cart-outline"></i>
+                                    <span> Orders </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarOrder">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('orders.pending') }}">Pending Orders</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('orders.completed') }}">Completed Orders</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
                             <li class="menu-title mt-2">Custom</li>
                             <li>
                                 <a href="#sidebarAuth" data-bs-toggle="collapse">

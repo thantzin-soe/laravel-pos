@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ExpenseController;
 use App\Http\Controllers\Backend\PosController;
+use App\Http\Controllers\Backend\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,7 +84,20 @@ Route::middleware('auth')->group(function () {
 
 
     Route::controller(PosController::class)->group(function () {
-        Route::get('post', 'pos')->name('pos');
+        Route::get('pos', 'pos')->name('pos');
+        Route::post('addToCart', 'addToCart')->name('add.to.cart');
+        Route::get('getFromCart', 'getFromCart')->name('get.from.cart');
+        Route::put('updateCart', 'updateCart')->name('cart.update');
+        Route::get('cart/remove/{id}', 'cartRemove')->name('cart.remove');
+        Route::post('invoices/create', 'createInvoice')->name('invoices.create');
+    });
+
+    Route::controller(OrderController::class)->group(function () {
+        Route::post('orders/store', 'store')->name('orders.store');
+        Route::get('orders/pending', 'pendingOrders')->name('orders.pending');
+        Route::get('orders/completed', 'completedOrders')->name('orders.completed');
+        Route::put('orders/{order}', 'update')->name('orders.update');
+        Route::get('orders/{order}', 'show')->name('orders.details');
     });
 });
 

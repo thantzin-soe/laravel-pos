@@ -38,7 +38,7 @@
                 <div class="col-lg-6 col-xl-6">
                     <div class="card text-center">
                         <div class="card-body">
-                            <div class="table-responsive">
+                            <div class="">
                                 <table class="table table-bordered border-primary mb-0">
                                     <thead>
                                         <tr>
@@ -50,28 +50,49 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <td>Mark</td>
-                                        <td>
-                                            <input type="number" min="0" value="0" style="width: 40px;"  name="">
-                                        </td>
-                                        <td>Mark</td>
-                                        <td>Mark</td>
-                                        <td>
-                                            <a href="">
-                                                <i class="fas fa-trash-alt" style="color: #ffffff"></i>
-                                            </a>
-                                        </td>
+                                        @foreach($cart_items as $cart_item)
+                                            <tr>
+                                                <td>{{ $cart_item->name }} {{ $cart_item->id }}</td>
+                                                <td>
+                                                    <form method="POST" action="{{ route('cart.update') }}">
+                                                        @csrf
+                                                        @method("PUT")
+                                                        <input type="hidden" name="id" value="{{ $cart_item->id }}">
+                                                        <input type="number" min="1" value="{{ $cart_item->quantity }}" style="width: 40px;height: 31px;border-radius: 1px;" name="quantity">
+                                                        <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i></button>
+                                                    </form>
+
+                                                </td>
+                                                <td>{{ $cart_item->price }}</td>
+                                                <td>{{ $cart_item->price * $cart_item->quantity }}</td>
+                                                <td>
+                                                    <a href="{{ url('/cart/remove/'.$cart_item->id) }}">
+                                                        <i class="fas fa-trash-alt" style="color: #ffffff"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
+        
+                            
                             <div class="bg-primary">
                                 <br>
-                                <p style="font-size: 18px; color: #fff;">Quantity : 3434</p>
-                                <p style="font-size: 18px; color: #fff;">Subtotal : 3434</p>
-                                <p style="font-size: 18px; color: #fff;">Vat : 3434</p>
-                                <div><h2 class="text-white">Total :</h2><h1 class="text-white">3434</h1></div>
+                                <p style="font-size: 18px; color: #fff;">Quantity : {{ Cart::session(auth()->user()->id)->getTotalQuantity() }}</p>
+                                <p style="font-size: 18px; color: #fff;">Subtotal : {{ Cart::session(auth()->user()->id)->getSubTotal() }}</p>
+
+                                <p style="font-size: 18px; color: #fff;">Vat : {{ $vatcondition->getCalculatedValue(Cart::session(auth()->user()->id)->getSubTotal()) }}</p>
+                                @php 
+                                    Cart::session(auth()->user()->id)->condition($vatcondition);
+                                @endphp
+                                <div><h2 class="text-white">Total :</h2><h1 class="text-white">{{ Cart::session(auth()->user()->id)->getTotal() }}</h1></div>
                             </div>
-                            <form class="mt-4">
+                            @php 
+                                Cart::session(auth()->user()->id)->clearCartConditions();
+                            @endphp
+                            <form class="mt-4" method="POST" action="{{ route('invoices.create') }}">
+                                @csrf
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <label for="customer_id" class="form-label">Select Customer</label>
@@ -85,7 +106,7 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <button class="btn btn-primary waves-effect waves-light">Create Invoice</button>
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Create Invoice</button>
                                 </div>
                             </form>
                         </div>                                 
