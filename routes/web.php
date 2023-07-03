@@ -96,6 +96,7 @@ Route::middleware('auth')->group(function () {
         Route::post('orders/store', 'store')->name('orders.store');
         Route::get('orders/pending', 'pendingOrders')->name('orders.pending');
         Route::get('orders/completed', 'completedOrders')->name('orders.completed');
+        Route::get('orders/invoice-download/{order}', 'orderInvoice')->name('orders.invoice');
         Route::put('orders/{order}', 'update')->name('orders.update');
         Route::get('orders/{order}', 'show')->name('orders.details');
 

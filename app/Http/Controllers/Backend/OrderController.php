@@ -10,6 +10,7 @@ use App\Models\OrderDetails;
 use Cart;
 use DataTables;
 use Darryldecode\Cart\CartCondition;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderController extends Controller
 {
@@ -151,5 +152,20 @@ class OrderController extends Controller
                 ->make(true);
         }
         return view('backend.stock.index');
+    }
+
+
+    public function orderInvoice(Order $order)
+    {
+        $order->load(['customer']);
+        $orderItem = OrderDetails::with('product')->where('order_id', $order->id)->get();
+
+        $pdf = Pdf::loadView('backend.order.invoice', compact('order', 'orderItem'))->setPaper('a4')->setOptions([
+            'enable_remote' => true,
+            'tempDir' => public_path(),
+            'chroot' => public_path(),
+        ]);
+        return $pdf->stream('invoice.pdf');
+        return $pdf->download('invoice.pdf');
     }
 }
