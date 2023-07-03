@@ -193,6 +193,49 @@
                                 </div>
                             </li>
 
+                            <li>
+                                <a href="#sidebarRolesAndPermission" data-bs-toggle="collapse">
+                                    <i class="fas fa-weight-hanging"></i>
+                                    <span> Roles & Permisison </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarRolesAndPermission">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('permissions.index') }}">All Permission</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('roles.index') }}">All Roles</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('roles.attach.permission') }}">Attach Permissions to Role</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('roles.with.permission') }}">Roles With Permissions</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+
+                            <li>
+                                <a href="#sidebarAdmin" data-bs-toggle="collapse">
+                                    <i class="fas fa-weight-hanging"></i>
+                                    <span> Setting Admin User </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarAdmin">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admins.index') }}">All Admin</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admins.create') }}">All Admin</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
                             <li class="menu-title mt-2">Custom</li>
                             <li>
                                 <a href="#sidebarAuth" data-bs-toggle="collapse">
