@@ -29,7 +29,7 @@
 
                             <li>
                                 <a href="#sidebarEmployee" data-bs-toggle="collapse">
-                                    <i class="mdi mdi-cart-outline"></i>
+                                    <i class="mdi mdi-account-group"></i>
                                     <span> Employee Manage </span>
                                     <span class="menu-arrow"></span>
                                 </a>
@@ -48,7 +48,7 @@
 
                             <li>
                                 <a href="#sidebarCustomer" data-bs-toggle="collapse">
-                                    <i class="mdi mdi-cart-outline"></i>
+                                    <i class="mdi mdi-account-group"></i>
                                     <span> Customer Manage </span>
                                     <span class="menu-arrow"></span>
                                 </a>
@@ -67,7 +67,7 @@
 
                             <li>
                                 <a href="#sidebarSupplier" data-bs-toggle="collapse">
-                                    <i class="mdi mdi-cart-outline"></i>
+                                    <i class="mdi mdi-account-group"></i>
                                     <span> Supplier Manage </span>
                                     <span class="menu-arrow"></span>
                                 </a>
@@ -86,7 +86,7 @@
 
                             <li>
                                 <a href="#sidebarSalary" data-bs-toggle="collapse">
-                                    <i class="mdi mdi-cart-outline"></i>
+                                    <i class="mdi mdi-cash-multiple"></i>
                                     <span> Employee Salary </span>
                                     <span class="menu-arrow"></span>
                                 </a>
@@ -108,7 +108,7 @@
 
                             <li>
                                 <a href="#sidebarAttendance" data-bs-toggle="collapse">
-                                    <i class="mdi mdi-cart-outline"></i>
+                                    <i class="mdi mdi-briefcase-check-outline"></i>
                                     <span> Employee Attendance </span>
                                     <span class="menu-arrow"></span>
                                 </a>
@@ -124,7 +124,7 @@
 
                             <li>
                                 <a href="#sidebarCategory" data-bs-toggle="collapse">
-                                    <i class="mdi mdi-cart-outline"></i>
+                                    <i class="mdi mdi-clipboard-list-outline"></i>
                                     <span> Category </span>
                                     <span class="menu-arrow"></span>
                                 </a>
@@ -140,7 +140,7 @@
 
                             <li>
                                 <a href="#sidebarProduct" data-bs-toggle="collapse">
-                                    <i class="mdi mdi-cart-outline"></i>
+                                    <i class="fas fa-bars"></i>
                                     <span> Product </span>
                                     <span class="menu-arrow"></span>
                                 </a>
@@ -161,7 +161,7 @@
 
                             <li>
                                 <a href="#sidebarOrder" data-bs-toggle="collapse">
-                                    <i class="mdi mdi-cart-outline"></i>
+                                    <i class="fas fa-shopping-cart"></i>
                                     <span> Orders </span>
                                     <span class="menu-arrow"></span>
                                 </a>
@@ -180,7 +180,7 @@
 
                             <li>
                                 <a href="#sidebarStock" data-bs-toggle="collapse">
-                                    <i class="mdi mdi-cart-outline"></i>
+                                    <i class="fas fa-weight-hanging"></i>
                                     <span> Stock Management </span>
                                     <span class="menu-arrow"></span>
                                 </a>
