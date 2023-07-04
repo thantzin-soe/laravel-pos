@@ -16,6 +16,8 @@ class AdvanceSalaryController extends Controller
     public function __construct(AdvanceSalaryRepositoryInterface $advanceSalaryRepository)
     {
         $this->advanceSalaryRepository = $advanceSalaryRepository;
+        $this->middleware('permission:salary.all', ['only' => ['index']]);
+        $this->middleware('permission:salary.add', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     }
 
     /**

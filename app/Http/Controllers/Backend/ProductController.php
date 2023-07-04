@@ -27,6 +27,7 @@ class ProductController extends Controller
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
         $this->supplierRepository = $supplierRepository;
+        $this->middleware('permission:product.menu');
     }
     /**
      * Display a listing of the resource.

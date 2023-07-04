@@ -17,6 +17,7 @@
                                 </a>
                             </li>
 
+                            @if(auth()->user()->can('pos.menu'))
                             <li>
                                 <a href="{{ route('pos') }}">
                                     <span class="badge bg-pink float-end">Hot</span>
@@ -24,9 +25,11 @@
                                     <span> POS </span>
                                 </a>
                             </li>
+                            @endif
 
                             <li class="menu-title mt-2">Apps</li>
 
+                            @if(auth()->user()->can('employee.menu'))
                             <li>
                                 <a href="#sidebarEmployee" data-bs-toggle="collapse">
                                     <i class="mdi mdi-account-group"></i>
@@ -35,17 +38,22 @@
                                 </a>
                                 <div class="collapse" id="sidebarEmployee">
                                     <ul class="nav-second-level">
+                                        @if(auth()->user()->can('employee.all'))
                                         <li>
                                             <a href="{{ route('employees.index') }}">All Employees</a>
                                         </li>
+                                        @endif
+                                        @if(auth()->user()->can('employee.add'))
                                         <li>
                                             <a href="{{ route('employees.create') }}">Add Employee</a>
                                         </li>
-                                        
-                                    </ul>
+                                        @endif
+                                    </ul>   
                                 </div>
                             </li>
+                            @endif
 
+                            @if(auth()->user()->can('customer.menu'))
                             <li>
                                 <a href="#sidebarCustomer" data-bs-toggle="collapse">
                                     <i class="mdi mdi-account-group"></i>
@@ -54,17 +62,22 @@
                                 </a>
                                 <div class="collapse" id="sidebarCustomer">
                                     <ul class="nav-second-level">
+                                        @if(auth()->user()->can('customer.all'))
                                         <li>
                                             <a href="{{ route('customers.index') }}">All Customers</a>
                                         </li>
+                                        @endif
+                                        @if(auth()->user()->can('customer.add'))
                                         <li>
                                             <a href="{{ route('customers.create') }}">Add Customer</a>
                                         </li>
-                                        
+                                        @endif
                                     </ul>
                                 </div>
                             </li>
+                            @endif
 
+                            @if(auth()->user()->can('supplier.menu'))
                             <li>
                                 <a href="#sidebarSupplier" data-bs-toggle="collapse">
                                     <i class="mdi mdi-account-group"></i>
@@ -73,17 +86,22 @@
                                 </a>
                                 <div class="collapse" id="sidebarSupplier">
                                     <ul class="nav-second-level">
+                                        @if(auth()->user()->can('supplier.all'))
                                         <li>
                                             <a href="{{ route('suppliers.index') }}">All Suppliers</a>
                                         </li>
+                                        @endif
+                                        @if(auth()->user()->can('supplier.add'))
                                         <li>
                                             <a href="{{ route('suppliers.create') }}">Add Supplier</a>
                                         </li>
-                                        
+                                        @endif
                                     </ul>
                                 </div>
                             </li>
+                            @endif
 
+                            @if(auth()->user()->can('salary.menu'))
                             <li>
                                 <a href="#sidebarSalary" data-bs-toggle="collapse">
                                     <i class="mdi mdi-cash-multiple"></i>
@@ -92,20 +110,27 @@
                                 </a>
                                 <div class="collapse" id="sidebarSalary">
                                     <ul class="nav-second-level">
+                                        @if(auth()->user()->can('salary.add'))
                                         <li>
                                             <a href="{{ route('advance_salaries.create') }}">Add Advance Salary</a>
                                         </li>
+                                        @endif
+                                        @if(auth()->user()->can('salary.all'))
                                         <li>
                                             <a href="{{ route('advance_salaries.index') }}">All Advance Salary</a>
                                         </li>
+                                        @endif
+                                        @if(auth()->user()->can('salary.pay'))
                                         <li>
                                             <a href="{{ route('salaries.index') }}">Pay Salary</a>
                                         </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </li>
+                            @endif
 
-
+                            @if(auth()->user()->can('attendance.menu'))
                             <li>
                                 <a href="#sidebarAttendance" data-bs-toggle="collapse">
                                     <i class="mdi mdi-briefcase-check-outline"></i>
@@ -121,7 +146,9 @@
                                     </ul>
                                 </div>
                             </li>
+                            @endif
 
+                            @if(auth()->user()->can('category.menu'))
                             <li>
                                 <a href="#sidebarCategory" data-bs-toggle="collapse">
                                     <i class="mdi mdi-clipboard-list-outline"></i>
@@ -137,7 +164,9 @@
                                     </ul>
                                 </div>
                             </li>
+                            @endif
 
+                            @if(auth()->user()->can('product.menu'))
                             <li>
                                 <a href="#sidebarProduct" data-bs-toggle="collapse">
                                     <i class="fas fa-bars"></i>
@@ -158,7 +187,9 @@
                                     </ul>
                                 </div>
                             </li>
+                            @endif
 
+                            @if(auth()->user()->can('order.menu'))
                             <li>
                                 <a href="#sidebarOrder" data-bs-toggle="collapse">
                                     <i class="fas fa-shopping-cart"></i>
@@ -176,8 +207,10 @@
                                     </ul>
                                 </div>
                             </li>
+                            @endif
 
 
+                            @if(auth()->user()->can('stock.menu'))
                             <li>
                                 <a href="#sidebarStock" data-bs-toggle="collapse">
                                     <i class="fas fa-weight-hanging"></i>
@@ -192,7 +225,9 @@
                                     </ul>
                                 </div>
                             </li>
+                            @endif
 
+                            @if(auth()->user()->can('roles.menu'))
                             <li>
                                 <a href="#sidebarRolesAndPermission" data-bs-toggle="collapse">
                                     <i class="fas fa-weight-hanging"></i>
@@ -216,8 +251,9 @@
                                     </ul>
                                 </div>
                             </li>
+                            @endif
 
-
+                            @role('Superadmin')
                             <li>
                                 <a href="#sidebarAdmin" data-bs-toggle="collapse">
                                     <i class="fas fa-weight-hanging"></i>
@@ -230,12 +266,14 @@
                                             <a href="{{ route('admins.index') }}">All Admin</a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admins.create') }}">All Admin</a>
+                                            <a href="{{ route('admins.create') }}">Add Admin</a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
+                            @endrole
 
+                            @role('Superadmin')
                             <li class="menu-title mt-2">Custom</li>
                             <li>
                                 <a href="#sidebarAuth" data-bs-toggle="collapse">
@@ -261,63 +299,8 @@
                                     </ul>
                                 </div>
                             </li>
+                            @endrole
 
-                            <li>
-                                <a href="#sidebarExpages" data-bs-toggle="collapse">
-                                    <i class="mdi mdi-text-box-multiple-outline"></i>
-                                    <span> Extra Pages </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <div class="collapse" id="sidebarExpages">
-                                    <ul class="nav-second-level">
-                                        <li>
-                                            <a href="pages-starter.html">Starter</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-timeline.html">Timeline</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-sitemap.html">Sitemap</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-invoice.html">Invoice</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-faqs.html">FAQs</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-search-results.html">Search Results</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-pricing.html">Pricing</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-maintenance.html">Maintenance</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-coming-soon.html">Coming Soon</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-gallery.html">Gallery</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-404.html">Error 404</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-404-two.html">Error 404 Two</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-404-alt.html">Error 404-alt</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-500.html">Error 500</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-500-two.html">Error 500 Two</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
                             
                         </ul>
 

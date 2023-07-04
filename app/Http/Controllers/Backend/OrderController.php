@@ -14,6 +14,11 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:stock.menu', ['only' => ['manageStock']]);
+    }
+
     public function store(Request $request)
     {
         $vatcondition = new CartCondition([

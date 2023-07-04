@@ -16,6 +16,9 @@ class PaySalaryController extends Controller
     public function __construct(EmployeeRepositoryInterface $employeeRepository)
     {
         $this->employeeRepository = $employeeRepository;
+        $this->middleware('permission:salary.all', ['only' => ['index']]);
+        $this->middleware('permission:salary.pay', ['only' => ['paySalary']]);
+        $this->middleware('permission:salary.paid', ['only' => ['paidSalary']]);
     }
 
     public function index(Request $request)

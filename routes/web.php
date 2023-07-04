@@ -62,8 +62,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::controller(AttendanceController::class)->group(function () {
-        Route::get('attendances', 'index')->name('attendances.index');
-        Route::post('attendances', 'save')->name('attendances.save');
+        Route::get('attendances', 'index')->name('attendances.index')->middleware('permission:attendance.menu');
+        Route::post('attendances', 'save')->name('attendances.save')->middleware('permission:attendance.menu');
     });
 
     Route::resource('categories', CategoryController::class);
@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::post('exports/products', [ProductController::class, 'exportProduct'])->name('products.export');
 
 
-    Route::controller(ExpenseController::class)->group(function () {
+    Route::controller(ExpenseController::class)->middleware(['permission:expense.menu'])->group(function () {
         Route::get('expenses', 'create')->name('expenses.create');
         Route::post('expenses', 'store')->name('expenses.store');
         Route::get('expenses/{expense}/edit', 'edit')->name('expenses.edit');
@@ -85,7 +85,7 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    Route::controller(PosController::class)->group(function () {
+    Route::controller(PosController::class)->middleware(['permission:pos.menu'])->group(function () {
         Route::get('pos', 'pos')->name('pos');
         Route::post('addToCart', 'addToCart')->name('add.to.cart');
         Route::get('getFromCart', 'getFromCart')->name('get.from.cart');
@@ -106,7 +106,7 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    Route::controller(RoleController::class)->group(function () {
+    Route::controller(RoleController::class)->middleware(['permission:roles.menu'])->group(function () {
         Route::get('permissions', 'allPermission')->name('permissions.index');
         Route::get('permissions/create', 'createPermission')->name('permissions.create');
         Route::post('permissions/store', 'storePermission')->name('permissions.store');
@@ -131,7 +131,7 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    Route::controller(AdminController::class)->group(function () {
+    Route::controller(AdminController::class)->middleware(['role:Superadmin'])->group(function () {
         Route::get('admins', 'index')->name('admins.index');
         Route::get('admins/create', 'create')->name('admins.create');
         Route::post('admins/store', 'store')->name('admins.store');

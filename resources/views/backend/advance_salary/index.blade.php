@@ -13,7 +13,9 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item active">
+                                    @if(auth()->user()->can('salary.add'))
                                     <a href="{{ route('advance_salaries.create') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Advance Salary</a>
+                                    @endif
                                 </li>
                             </ol>
                         </div>

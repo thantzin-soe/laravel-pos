@@ -20,6 +20,10 @@ class EmployeeController extends Controller
     public function __construct(EmployeeRepositoryInterface $employeeRepository)
     {
         $this->employeeRepository = $employeeRepository;
+        $this->middleware('permission:employee.all', ['only' => ['index']]);
+        $this->middleware('permission:employee.add', ['only' => ['create', 'store']]);
+        $this->middleware('permission:employee.edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:employee.delete', ['only' => ['destroy']]);
     }
 
     /**

@@ -18,6 +18,10 @@ class SupplierController extends Controller
     public function __construct(SupplierRepositoryInterface $supplierRepository)
     {
         $this->supplierRepository = $supplierRepository;
+        $this->middleware('permission:supplier.all', ['only' => ['index']]);
+        $this->middleware('permission:supplier.add', ['only' => ['create', 'store']]);
+        $this->middleware('permission:supplier.edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:supplier.delete', ['only' => ['destroy']]);
     }
 
     /**

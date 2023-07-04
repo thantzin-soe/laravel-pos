@@ -82,12 +82,6 @@ class PosController extends Controller
         Cart::session(auth()->user()->id)->clearCartConditions();
         Cart::session(auth()->user()->id)->clear();
         Cart::clear();
-
-        // $cart_items = Cart::session(auth()->user()->id)->getContent();
-        // $sorted = $cart_items->sortBy(function ($item, $b) {
-        //     return $item['attributes']['created_at'];
-        // });
-        // return $sorted;
     }
 
     public function updateCart(Request $request)

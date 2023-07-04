@@ -130,7 +130,7 @@
                             <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                                 <img src="{{ auth()->user()->photo ? auth()->user()->photo_url : config('app.cloudinary_no_image_url') }}" alt="user-image" class="rounded-circle">
                                 <span class="pro-user-name ms-1">
-                                    Geneva <i class="mdi mdi-chevron-down"></i> 
+                                    {{ auth()->user()->name }} <i class="mdi mdi-chevron-down"></i> 
                                 </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end profile-dropdown ">

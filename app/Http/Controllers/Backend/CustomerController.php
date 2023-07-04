@@ -18,6 +18,10 @@ class CustomerController extends Controller
     public function __construct(CustomerRepositoryInterface $customerRepository)
     {
         $this->customerRepository = $customerRepository;
+        $this->middleware('permission:customer.all', ['only' => ['index']]);
+        $this->middleware('permission:customer.add', ['only' => ['create', 'store']]);
+        $this->middleware('permission:customer.edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:customer.delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

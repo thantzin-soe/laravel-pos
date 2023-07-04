@@ -13,7 +13,9 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item active">
+                                    @if(auth()->user()->can('customer.add'))
                                     <a href="{{ route('customers.create') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Customer</a>
+                                    @endif
                                 </li>
                             </ol>
                         </div>

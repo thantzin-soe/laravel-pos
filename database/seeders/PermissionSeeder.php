@@ -52,6 +52,7 @@ class PermissionSeeder extends Seeder
         ];
 
         foreach ($permissions as $permission) {
+            \Illuminate\Support\Facades\Log::info($permission);
             Permission::create($permission);
         }
     }
