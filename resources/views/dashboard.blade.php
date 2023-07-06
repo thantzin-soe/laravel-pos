@@ -1,7 +1,15 @@
 @extends('admin_layouts.admin_dashboard')
 @section('content')
-    <div class="content">
+    @php 
+        $date = date('d-F-Y');
+        $today_paid = \App\Models\Order::where('order_date', $date)->where('order_status', 'complete')->sum('pay');
+        $total_paid = \App\Models\Order::sum('pay');
+        $total_due = \App\Models\Order::sum('due');
+        $complete_orders = \App\Models\Order::where('order_status', 'complete')->get();
+        $pending_orders = \App\Models\Order::where('order_status', 'pending')->get();
 
+    @endphp
+    <div class="content">
         <!-- Start Content-->
         <div class="container-fluid">
             
@@ -43,8 +51,8 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-end">
-                                        <h3 class="text-dark mt-1">$<span data-plugin="counterup">58,947</span></h3>
-                                        <p class="text-muted mb-1 text-truncate">Total Revenue</p>
+                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">{{ $total_paid }}</span> ks</h3>
+                                        <p class="text-muted mb-1 text-truncate">Total Paid</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
@@ -63,8 +71,8 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-end">
-                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">127</span></h3>
-                                        <p class="text-muted mb-1 text-truncate">Today's Sales</p>
+                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">{{ $total_due}}</span> ks</h3>
+                                        <p class="text-muted mb-1 text-truncate">Total Due</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
@@ -83,8 +91,8 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-end">
-                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">0.58</span>%</h3>
-                                        <p class="text-muted mb-1 text-truncate">Conversion</p>
+                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">{{ $complete_orders->count() }}</span></h3>
+                                        <p class="text-muted mb-1 text-truncate">Complete Orders</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
@@ -103,8 +111,8 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-end">
-                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">78.41</span>k</h3>
-                                        <p class="text-muted mb-1 text-truncate">Today's Visits</p>
+                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">{{ $pending_orders->count() }}</span></h3>
+                                        <p class="text-muted mb-1 text-truncate">Pending Orders</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->

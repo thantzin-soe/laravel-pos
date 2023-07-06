@@ -189,7 +189,7 @@
                             </li>
                             @endif
 
-                            @if(auth()->user()->can('order.menu'))
+                            @if(auth()->user()->can('orders.menu'))
                             <li>
                                 <a href="#sidebarOrder" data-bs-toggle="collapse">
                                     <i class="fas fa-shopping-cart"></i>
@@ -203,6 +203,9 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('orders.completed') }}">Completed Orders</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('orders.pending.due') }}">Pending Due</a>
                                         </li>
                                     </ul>
                                 </div>

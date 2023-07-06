@@ -34,7 +34,7 @@ class PosController extends Controller
     public function pos(Request $request)
     {
         if ($request->ajax()) {
-            return Datatables::of(Product::orderBy('name', 'ASC'))
+            return Datatables::of(Product::where('expire_date', '>', now()->format('Y-m-d'))->orderBy('name', 'ASC'))
                 ->addIndexColumn()
                 ->addColumn('action', function (Product $product) {
                     return view('backend.pos.product.datatable.action')->with('product', $product);

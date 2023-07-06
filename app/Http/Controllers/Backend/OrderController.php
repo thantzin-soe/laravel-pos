@@ -29,6 +29,10 @@ class OrderController extends Controller
         ]);
         Cart::session(auth()->user()->id)->condition($vatcondition);
 
+        $rtotal = $request->total;
+        $rpay = $request->pay;
+        $mtotal = $rtotal - $rpay;
+
         $data = [];
         $data['customer_id'] = $request->customer_id;
         $data['order_date'] = $request->order_date;
@@ -40,7 +44,7 @@ class OrderController extends Controller
         $data['total'] = $request->total;
         $data['payment_status'] = $request->payment_status;
         $data['pay'] = $request->pay;
-        $data['due'] = $request->due;
+        $data['due'] = $mtotal;
 
         $order = Order::create($data);
         $cart_items = Cart::session(auth()->user()->id)->getContent();
@@ -68,7 +72,7 @@ class OrderController extends Controller
     public function pendingOrders(Request $request)
     {
         if ($request->ajax()) {
-            return Datatables::of(Order::where('order_status', 'pending')->orderBy('id', 'DESC')->with(['customer']))
+            return Datatables::of(Order::where('order_status', 'pending')->where('due', '=', 0)->orderBy('id', 'DESC')->with(['customer']))
                 ->addIndexColumn()
                 ->addColumn('action', function (Order $order) {
                     return view('backend.order.datatable.action')->with('order', $order);
@@ -171,6 +175,63 @@ class OrderController extends Controller
             'chroot' => public_path(),
         ]);
         return $pdf->stream('invoice.pdf');
-        return $pdf->download('invoice.pdf');
+    }
+
+    public function pendingDueOrders(Request $request)
+    {
+        if ($request->ajax()) {
+            return Datatables::of(Order::where('due', '>', 0)->orderBy('id', 'DESC')->with(['customer']))
+                ->addIndexColumn()
+                ->addColumn('action', function (Order $order) {
+                    return view('backend.order.datatable.pending_due_action')->with('order', $order);
+                })
+                ->editColumn('image', function (Order $order) {
+                    return "<img src='".$order->customer->image_url."' style='width:50px;height:40px'>";
+                })
+                ->editColumn('total', function (Order $order) {
+                    return "<span class='btn btn-info waves-effect waves-light'>".$order->total."</div>";
+                })
+                ->editColumn('pay', function (Order $order) {
+                    return "<span class='btn btn-warning waves-effect waves-light'>".$order->pay."</div>";
+                })
+                ->editColumn('due', function (Order $order) {
+                    return "<span class='btn btn-danger waves-effect waves-light'>".$order->due."</div>";
+                })
+                ->rawColumns(['action', 'image', 'pay', 'due', 'total'])
+                ->make(true);
+        }
+        return view('backend.order.pending_due');
+    }
+
+    public function getPendingDueOrder(Order $order)
+    {
+        return response()->json($order);
+    }
+
+
+    public function updateDue(Request $request)
+    {
+        $order_id = $request->id;
+        $due_amount = $request->due;
+        $pay_amount = $request->pay;
+
+        $order = Order::findOrFail($order_id);
+        $main_due = $order->due;
+        $main_pay = $order->pay;
+
+        $paid_due = $main_due - $due_amount;
+        $paid_pay = $main_pay + $due_amount;
+
+        $order->update([
+            'due' => $paid_due,
+            'pay' => $paid_pay
+        ]);
+
+        $notification = [
+            'message' => 'Due amount updated successfully',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('orders.pending.due')->with($notification);
     }
 }

@@ -185,16 +185,6 @@
                             </div>
                         </div>
 
-                       <div class="col-md-12">
-                            <div class="mb-3">
-                                <label for="due" class="form-label">Due Amount</label>
-                                <input type="text" class="form-control" name="due">
-                                @error('due')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-
                         <div class="col-md-12 text-center">
                             <button type="submit" class="btn btn-primary waves-effect waves-light">Complete Order</button>
                         </div>

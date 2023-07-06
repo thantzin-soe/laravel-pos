@@ -98,6 +98,9 @@ Route::middleware('auth')->group(function () {
         Route::post('orders/store', 'store')->name('orders.store');
         Route::get('orders/pending', 'pendingOrders')->name('orders.pending');
         Route::get('orders/completed', 'completedOrders')->name('orders.completed');
+        Route::get('orders/pending-due', 'pendingDueOrders')->name('orders.pending.due');
+        Route::get('orders/pending-due/{order}', 'getPendingDueOrder')->name('orders.pending.due.show');
+        Route::put('orders/update-due', 'updateDue')->name('update.due');
         Route::get('orders/invoice-download/{order}', 'orderInvoice')->name('orders.invoice');
         Route::put('orders/{order}', 'update')->name('orders.update');
         Route::get('orders/{order}', 'show')->name('orders.details');
